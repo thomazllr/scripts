@@ -23,33 +23,36 @@ cat > "${nome_base}.c" <<EOF
 ${nome_base} *${nome_base}_create() 
 {
 
-    ${nome_base}* $base = (${nome_base}*)malloc(sizeof(${nome_base}));
-    if (!$base) {
+    ${nome_base} *base = (${nome_base}*)malloc(sizeof(${nome_base}));
+    if (base == NULL) {
         printf("Erro ao alocar memória.\n");
-        return 1;
+        return NULL;
     }
 
 }
 
-bool ${nome_base}_insert() 
+bool ${nome_base}_insert(${nome_base} *base, int data) 
 {
 
 }
 
-bool ${nome_base}_delete()
+bool ${nome_base}_delete(${nome_base} *base, int data)
 {
 
 }
 
-void ${nome_base}_join() 
+${nome_base} *${nome_base}_join(${nome_base} *base1, ${nome_base} *base2) 
 {
 
 }
 
-bool ${nome_base}_isEmpty() 
+bool ${nome_base}_isEmpty(${nome_base} *base) 
 {
 
 }
+
+
+EOF
 
 EOF
 
@@ -64,10 +67,10 @@ typedef struct _template {
 } ${nome_base};
 
 ${nome_base} *${nome_base}_create();
-bool *${nome_base}_insert();
-bool *${nome_base}_delete();
-void *${nome_base}_join();
-bool *${nome_base}_isEmpty();
+bool ${nome_base}_insert(${nome_base}* base, int data);
+bool ${nome_base}_delete(${nome_base}* base, int data);
+${nome_base} *${nome_base}_join(${nome_base} *base, ${nome_base} *base2);
+bool ${nome_base}_isEmpty(${nome_base} *base);
 
 #endif // ${nome_base^^}_H
 EOF
