@@ -11,3 +11,86 @@ nome_base=$1
 
 # Cria os arquivos com extensões .h e .c
 touch "${nome_base}.h" "${nome_base}.c"
+
+echo "Arquivos criados com sucesso!"
+
+cat > "${nome_base}.c" <<EOF
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "${nome_base}.h"
+
+${nome_base} *${nome_base}_create() 
+{
+
+    ${nome_base}* $base = (${nome_base}*)malloc(sizeof(${nome_base}));
+    if (!$base) {
+        printf("Erro ao alocar memória.\n");
+        return 1;
+    }
+
+}
+
+bool ${nome_base}_insert() 
+{
+
+}
+
+bool ${nome_base}_delete()
+{
+
+}
+
+void ${nome_base}_join() 
+{
+
+}
+
+bool ${nome_base}_isEmpty() 
+{
+
+}
+
+EOF
+
+
+cat > "${nome_base}.h" <<EOF
+#ifndef ${nome_base^^}_H
+#define ${nome_base^^}_H
+#include <stdbool.h>
+
+typedef struct _template {
+    int data;
+} ${nome_base};
+
+${nome_base} *${nome_base}_create();
+bool *${nome_base}_insert();
+bool *${nome_base}_delete();
+void *${nome_base}_join();
+bool *${nome_base}_isEmpty();
+
+#endif // ${nome_base^^}_H
+EOF
+
+if [ ! -f "main.c" ]; then
+    echo "Arquivo main.c não encontrado!"
+    exit 1
+fi
+
+# Define os includes a serem adicionados
+includes=("#include \"${nome_base}.h\"")
+
+# Função para adicionar includes ao arquivo se não existirem
+add_includes() {
+    local file=$1
+    for include in "${includes[@]}"; do
+        if ! grep -qx "$include" "$file"; then
+            sed -i "1i $include" "$file"
+        fi
+    done
+}
+
+# Adiciona os includes ao arquivo main.c
+add_includes "main.c"
+
+echo "Includes adicionados ao arquivo main.c com sucesso!"
