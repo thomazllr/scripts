@@ -6,14 +6,15 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-# Obtém o nome base do parâmetro
+
 nome_base=$1
 
-# Cria os arquivos com extensões .h e .c
 touch "${nome_base}.h" "${nome_base}.c"
+
 
 echo "Arquivos criados com sucesso!"
 
+# Adiciona os includes necessários ao arquivo .c
 cat > "${nome_base}.c" <<EOF
 #include <stdlib.h>
 #include <stdio.h>
@@ -23,54 +24,25 @@ cat > "${nome_base}.c" <<EOF
 ${nome_base} *${nome_base}_create() 
 {
 
-    ${nome_base} *base = (${nome_base}*)malloc(sizeof(${nome_base}));
-    if (base == NULL) {
-        printf("Erro ao alocar memória.\n");
-        return NULL;
-    }
-
-}
-
-bool ${nome_base}_insert(${nome_base} *base, int data) 
-{
-
-}
-
-bool ${nome_base}_delete(${nome_base} *base, int data)
-{
-
-}
-
-${nome_base} *${nome_base}_join(${nome_base} *base1, ${nome_base} *base2) 
-{
-
-}
-
-bool ${nome_base}_isEmpty(${nome_base} *base) 
-{
+    ${nome_base} * = (${nome_base}*)malloc(sizeof(${nome_base}));
 
 }
 
 
 EOF
 
-EOF
 
-
+# Cria os arquivos com extensões .h e .c
 cat > "${nome_base}.h" <<EOF
 #ifndef ${nome_base^^}_H
 #define ${nome_base^^}_H
 #include <stdbool.h>
 
-typedef struct _template {
+typedef struct _ {
     int data;
 } ${nome_base};
 
-${nome_base} *${nome_base}_create();
-bool ${nome_base}_insert(${nome_base}* base, int data);
-bool ${nome_base}_delete(${nome_base}* base, int data);
-${nome_base} *${nome_base}_join(${nome_base} *base, ${nome_base} *base2);
-bool ${nome_base}_isEmpty(${nome_base} *base);
+
 
 #endif // ${nome_base^^}_H
 EOF
